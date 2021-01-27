@@ -28,7 +28,7 @@
  				<input type="password" id="senha" name="senha" class="form-control" placeholder="<spring:message code="login.input.senha"/>" required/>
 				<div class="form-actions">
  					<button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="login.btlogin.label"/></button>
- 					<c:url var="create_url" value="/usuario/criar" /> --%
+ 					<c:url var="create_url" value="/usuario/add" /> --%
  					<a href="${create_url}" class="btn btn-lg btn-primary btn-block"><spring:message code="login.btNovoUsuario.label"/></a>
 				</div>
 			</form:form>
