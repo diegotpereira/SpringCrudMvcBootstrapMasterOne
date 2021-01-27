@@ -55,7 +55,8 @@
    <!-- Entrada Nome -->
    <form:errors path="nomeUsuario" element="div"
     class="alert alert-teste alert-warning" />
-   <div id="usuario-alert" style="display: none"
+    
+   <div id="user-alert" style="display: none"
     class="alert alert-warning"></div>
    <spring:message code="criar.input.nomeUsuario" var="nomeUsuariolabel" />
    <form:input path="nomeUsuario" class="form-control"
@@ -78,9 +79,9 @@
     placeholder="${confirmPasswordLabel }" required="required" />
 
    <!-- Entrada Função -->
-   <form:errors path="Funcao" element="div" class="alert alert-warning" />
-   <c:forEach items="<%=Funcao.values() %>" var="Funcao">
-    <spring:message code="usuario.funcao.${funcao.nome()}" var="label" />
+   <form:errors path="funcao" element="div" class="alert alert-warning" />
+   <c:forEach items="<%=Funcao.values() %>" var="funcao">
+    <spring:message code="usuario.funcao.${Funcao.nome()}" var="label" />
     <form:radiobutton path="funcao" value="${funcao }" label="${label }"
      required="true" />&nbsp
           </c:forEach>
@@ -88,14 +89,14 @@
    <div class="form-actions">
     <button type="submit" id="btn-salvar"
      class="btn btn-lg btn-primary btn-block">
-     <spring:message code="criar.input.cadastra" />
+     <spring:message code="criar.input.cadastra"/>
     </button>
-    <sec:authorize access="isAnonymous()" var="usuarioDeslogado" />
+    <sec:authorize access="isAnonymous()" var="usuarioDeslogado"/>
     <c:choose>
      <c:when test="${usuarioDeslogado }">
       <c:url var="login_url" value="/login/" />
       <a href="${login_url }" class="btn btn-lg btn-primary btn-block"><spring:message
-        code="login.title" /></a>
+        code="login.titulo" /></a>
      </c:when>
      <c:otherwise>
       <c:url var="home_url" value="/" />
@@ -113,7 +114,7 @@
 
   $( document ).ready(function() {
         var date = new Date();
-           $( "#datanascimento-input" ).datepicker({ 
+           $( "#dataNascimento-input" ).datepicker({ 
              yearRange: date.getFullYear() - 150 + ":" +  date.getFullYear(),
              changeMonth: true,
              changeYear: true, 
