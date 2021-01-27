@@ -46,7 +46,7 @@ public class UsuarioController {
 		return "redirect:/usuario/add";
 	}
 	@RequestMapping(value = "/checkusuarionome", method = RequestMethod.GET)
-	public @ResponseBody String checkUsernameExist(@RequestParam String nomeUsuario) {
+	public @ResponseBody String checkNomeUsuarioExiste(@RequestParam String nomeUsuario) {
 		return String.valueOf(Objects.nonNull(service.findBynomeUsuario(nomeUsuario)));
 	}
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

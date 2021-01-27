@@ -147,13 +147,13 @@
             var url = "<spring:url value="/usuario/checkusuarionome" />";
              $.ajax({
              url:url,
-             data: {username:username},
+             data: {nomeUsuario:nomeUsuario},
           type : "GET",
              success: function(data){
              
               if(data === 'true'){ 
                $(":submit").attr("disabled", true);
-               $("#user-alert").show().html("<spring:message code='criar.message.usuarioExistente.parte1'/><strong>" + username + "</strong><spring:message code='criar.message.usuarioExistente.parte2'/>"  );
+               $("#user-alert").show().html("<spring:message code='criar.message.usuarioExistente.parte1'/><strong>" + nomeUsuario + "</strong><spring:message code='criar.message.usuarioExistente.parte2'/>"  );
               } else {
                   $(":submit").removeAttr("disabled");
                $("#user-alert").hide().html("");

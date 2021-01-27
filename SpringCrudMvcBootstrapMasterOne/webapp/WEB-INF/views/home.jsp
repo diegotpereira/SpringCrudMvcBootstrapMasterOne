@@ -25,7 +25,7 @@
 				</c:if>
 	        </div>
 	        <div class="div-actions">
-		        <c:url var="create_url" value="/user/create" />
+		        <c:url var="create_url" value="/usuario/add" />
 		        <a href="${create_url}" class="btn btn-default btn-lg">
 				  <span class="glyphicon glyphicon-plus"></span> <spring:message code="home.input.addUser"/>
 		        </a>
@@ -52,7 +52,7 @@
 					    <td><fmt:formatDate type="date" value="${parsedDate}" /></td>
 					    <td><spring:message code="usuario.funcao.${usuario.funcao}"/></td>
 					    <td>
-					    	<c:url var="edit_url" value="/user/edit/${usuario.id}" />
+					    	<c:url var="edit_url" value="/usuario/edit/${usuario.id}" />
 	        				<spring:message code="home.usuarios.table.actions" var="editTitle"/>
 					    	<a href="${edit_url}" class="btn btn-default btn-lg" title="${editTitle}" >
 			  					<span class="glyphicon glyphicon-edit" ></span>

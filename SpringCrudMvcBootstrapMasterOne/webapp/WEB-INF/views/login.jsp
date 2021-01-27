@@ -18,6 +18,7 @@
 			<c:url var="post_url" value="/login" />
 			<form:form action="${post_url}" method="post" class="form-signin">
 				<h2 class="form-signin-heading"><spring:message code="login.titulo"/></h2>
+    
 				<c:if test="${param.error != null}">
 	                   <span class="alert alert-danger alert-warning-login"  style="float: initial;"><spring:message code="login.error"/></span>
 				</c:if>
@@ -25,7 +26,7 @@
 					<span class="alert alert-success alert-warning-login" ><spring:message code="login.logout.message"/></span>
 				</c:if>
 				<input type="text" id="nomeUsuario" name="nomeUsuario" class="form-control" placeholder="<spring:message code="login.input.usuario"/>" required autofocus/> 
- 				<input type="password" id="senha" name="senha" class="form-control" placeholder="<spring:message code="login.input.senha"/>" required/>
+ 				<input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="login.input.senha"/>" required/>
 				<div class="form-actions">
  					<button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="login.btlogin.label"/></button>
  					<c:url var="create_url" value="/usuario/add" />

@@ -149,6 +149,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		source.setDefaultEncoding("UTF-8");
 		return source;
 	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
