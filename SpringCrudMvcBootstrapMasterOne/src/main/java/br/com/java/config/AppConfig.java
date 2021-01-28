@@ -8,12 +8,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.servlet.Filter;
 import javax.sql.DataSource;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
@@ -25,6 +27,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -140,14 +143,40 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		 super.addResourceHandlers(registry);
 	}
-
-	@Bean
-	public ResourceBundleMessageSource messageSource() {
-		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-		source.setBasename("messages");
-		source.setUseCodeAsDefaultMessage(true);
-		source.setDefaultEncoding("UTF-8");
-		return source;
+//
+//	@Bean(name="messageSource")
+//	public ResourceBundleMessageSource messageSource() {
+//		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//		messageSource.setBasename("classpath:/message/messages");
+//		messageSource.setUseCodeAsDefaultMessage(true);
+//		messageSource.setDefaultEncoding("UTF-8");
+//		return messageSource;
+//	}
+	
+	 @Bean(name = "messageSource")
+	   public MessageSource getMessageResource()  {
+	       ReloadableResourceBundleMessageSource messageResource= new ReloadableResourceBundleMessageSource();
+	        
+	       // Read i18n/messages_xxx.properties file.
+	       // For example: i18n/messages_en.properties
+	 
+	       messageResource.setBasename("classpath:message/messages");
+	       messageResource.setDefaultEncoding("UTF-8");
+	       return messageResource;
+	   }
+//	@Bean(name="messageSource")
+//	    public MessageSource messageSource() {
+//	        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+//	        messageSource.setBasename("/WEB-INF/messages");
+//	        messageSource.setDefaultEncoding("UTF-8");
+//	        messageSource.setCacheSeconds(1);
+//	        return messageSource;
+//	    }
+//	@Bean
+	public LocalValidatorFactoryBean getValidator() {
+	    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+	    bean.setValidationMessageSource(getMessageResource());
+	    return bean;
 	}
 	
 	@Bean
@@ -155,7 +184,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
+	@Bean(name = "localeResolver")
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(new Locale("pt_BR"));
