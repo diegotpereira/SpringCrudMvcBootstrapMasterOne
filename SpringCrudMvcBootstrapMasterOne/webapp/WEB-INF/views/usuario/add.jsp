@@ -18,7 +18,7 @@
 
        <div class="container">
         <a href="?lang=en"> <img alt="English" src="<spring:url value="/resources/images/eua.jpg"    />"></a> 
-        <a href="?lang=pt_br"><img alt="Portugues" src="<spring:url value="/resources/images/brasil.jpg" />"></a>
+        <a href="?lang=pt_br"><img alt="Portugues" src="<spring:url value="/resources/images/brasil.jpeg" />"></a>
         <c:url var="post_url" value="/usuario/add/salvar" />
         <form:form id="form-add" action="${post_url}" modelAttribute="usuario" method="post" class="form-signin">
       
@@ -35,7 +35,7 @@
          <spring:message code="add.input.nome" var="nameLabel" />
          <form:input path="name" class="form-control" placeholder="${nameLabel }" required="true" autofocus="true" />
       
-         <!-- Entarada Data Nascimento -->
+         <!-- Entrada Data Nascimento -->
          <form:errors path="DataNascimento" element="div" class="alert alert-warning" />
          <spring:message code="add.input.dataNascimento" var="dataNascimento" />
          <form:input path="dataNascimento" readonly="readonly" id="dataNascimento-input" class="form-control" placeholder="${dataNascimento }" required="true" />
@@ -57,7 +57,7 @@
          <!-- Entrada Função -->
          <form:errors path="funcao" element="div" class="alert alert-warning" />
              <c:forEach items="<%=Funcao.values() %>" var="funcao"> 
-<%--              <spring:message code="usuario.funcao.${usuario.funcao()}" var="label" /> --%>
+             <spring:message code="usuario.funcao.${funcao.name()}" var="label" />
               <form:radiobutton path="funcao" value="${funcao}" label="${label }" required="true" />&nbsp</c:forEach>
       
               <div class="form-actions">
@@ -79,18 +79,16 @@
         <script type="text/javascript" src="<spring:url value="/resources/js/jquery.js" />"></script>
         <script type="text/javascript" src="<spring:url value="/resources/js/jquery-ui.min.js" />"></script>
         <script type="text/javascript">
-        $(document).ready(
-        	    function() {
-        	        var date = new Date();
-        	        $("#datanascimento-input").datepicker({
-        	            yearRange: date.getFullYear() - 150 + ":" +
-        	                date.getFullYear(),
-        	            changeMonth: true,
-        	            changeYear: true,
-        	            maxDate: "+0 +0",
-        	            dateFormat: "dd/mm/yy",
-        	        }).attr('readonly', 'readonly');
-        	    });
+	        $(document).ready(function() {
+	        	        var date = new Date();
+	        	        $( "#dataNascimento-input" ).datepicker({
+	        	            yearRange: date.getFullYear() - 150 + ":" + date.getFullYear(),
+	        	            changeMonth: true,
+	        	            changeYear: true,
+	        	            maxDate: "+0 +0",
+	        	            dateFormat: "dd/mm/yy",
+	        	        }).attr('readonly', 'readonly');
+	        	    });
 
         	$('form-add').submit(function() {
         	    return checkPasswords();
