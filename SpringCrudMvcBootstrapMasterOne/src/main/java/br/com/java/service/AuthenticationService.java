@@ -23,12 +23,12 @@ public class AuthenticationService implements UserDetailsService {
 	private UsuarioDao dao;
 
 	@Override
-	public UserDetails loadUserByUsername(String nomeUsuario) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario usuario = dao.findBynomeUsuario(nomeUsuario);
+		Usuario usuario = dao.findByUsername(username);
 		if (Objects.nonNull(usuario)) {
 			GrantedAuthority authority = new SimpleGrantedAuthority(usuario.getFuncao().name());
-			UserDetails userDetails = (UserDetails) new User(usuario.getNomeUsuario(), usuario.getPassword(),
+			UserDetails userDetails = (UserDetails) new User(usuario.getUsername(), usuario.getPassword(),
 					Arrays.asList(authority));
 			return userDetails;
 		}

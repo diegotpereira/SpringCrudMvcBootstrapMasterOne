@@ -10,7 +10,7 @@ public interface IUsuarioService {
 	
 	Usuario salvar(Usuario usuario);
 	
-	Usuario findBynomeUsuario (String nomeUsuario);
+	Usuario findByUsername (String username);
 	
 	List<Usuario> list();
 	
