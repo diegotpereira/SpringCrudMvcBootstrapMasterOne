@@ -17,7 +17,7 @@
 			<a href="?lang=pt_BR"><img alt="Portugues" src="<spring:url value="/resources/images/brasil.jpeg" />"></a>
 			<c:url var="post_url" value="/login" />
 			<form:form action="${post_url}" method="post" class="form-signin">
-				<h2 class="form-signin-heading"><spring:message code="login.title"/></h2>
+				<h2 class="form-signin-heading"><spring:message code="login.titulo"/></h2>
     
 				<c:if test="${param.error != null}">
 	                   <span class="alert alert-danger alert-warning-login"  style="float: initial;"><spring:message code="login.error"/></span>
