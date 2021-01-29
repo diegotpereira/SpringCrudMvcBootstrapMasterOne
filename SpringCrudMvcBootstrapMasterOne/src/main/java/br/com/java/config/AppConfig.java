@@ -45,6 +45,8 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import br.com.java.config.security.SecurityConfig;
 
+
+
 @Configuration
 @ComponentScan(basePackages = { "br.com.java" })
 @EnableWebMvc
@@ -172,7 +174,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 //	        messageSource.setCacheSeconds(1);
 //	        return messageSource;
 //	    }
-//	@Bean
+	@Bean
 	public LocalValidatorFactoryBean getValidator() {
 	    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 	    bean.setValidationMessageSource(getMessageResource());
