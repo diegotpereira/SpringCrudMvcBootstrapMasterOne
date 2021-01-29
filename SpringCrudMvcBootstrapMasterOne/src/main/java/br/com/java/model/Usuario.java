@@ -28,11 +28,11 @@ public class Usuario {
 	@Column(unique = true)
 	@NotEmpty
 	@Size(max = 50)
-	private String nomeUsuario;
+	private String username;
 	
 	@Column
 	@NotEmpty
-	private String nome;
+	private String name;
 	
 	@Column
 	@NotEmpty
@@ -50,11 +50,11 @@ public class Usuario {
 	
 	public Usuario() {}
 	
-	public Usuario(String nomeUsuario, String password, Funcao funcao, String nome, LocalDate dataNascimento ) {
+	public Usuario(String username, String password, Funcao funcao, String name, LocalDate dataNascimento ) {
 		super();
-		this.nomeUsuario = nomeUsuario;
+		this.username = username;
 		this.password = password;
-		this.nome = nome;
+		this.name = name;
 		this.funcao = funcao;
 		this.dataNascimento = dataNascimento;
 	}
@@ -67,22 +67,21 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
-
 
 	public String getPassword() {
 		return password;

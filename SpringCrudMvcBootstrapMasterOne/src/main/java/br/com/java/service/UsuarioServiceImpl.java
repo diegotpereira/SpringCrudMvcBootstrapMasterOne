@@ -32,9 +32,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	}
 
 	@Override
-	public Usuario findBynomeUsuario(String nomeUsuario) {
+	public Usuario findByUsername(String username) {
 		// TODO Auto-generated method stub
-		return dao.findBynomeUsuario(nomeUsuario);
+		return dao.findByUsername(username);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		if (authentication == null) {
 			return null;
 		}
-		return findBynomeUsuario(authentication.getName());
+		return findByUsername(authentication.getName());
 	}
 
 }

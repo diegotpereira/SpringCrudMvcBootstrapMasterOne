@@ -46,8 +46,8 @@ public class UsuarioController {
 		return "redirect:/usuario/add";
 	}
 	@RequestMapping(value = "/checkusuarionome", method = RequestMethod.GET)
-	public @ResponseBody String checkNomeUsuarioExiste(@RequestParam String nomeUsuario) {
-		return String.valueOf(Objects.nonNull(service.findBynomeUsuario(nomeUsuario)));
+	public @ResponseBody String checkNomeUsuarioExiste(@RequestParam String username) {
+		return String.valueOf(Objects.nonNull(service.findByUsername(username)));
 	}
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") int id, Model model) {
@@ -60,10 +60,10 @@ public class UsuarioController {
 	public String remove(Principal principal, HttpServletRequest httpRequest, @PathVariable("id") long id,
 			Model model) {
 		Usuario usuario = service.findById(id);
-		Usuario usuarioLogado = service.findBynomeUsuario(principal.getName());
+		Usuario usuarioLogado = service.findByUsername(principal.getName());
 		service.remover(id);
-		model.addAttribute("message", messageSource.getMessage("message.user.removed",
-				new Object[] { usuario.getNome() }, Locale.getDefault()));
+		model.addAttribute("message", messageSource.getMessage("message.usuario.removed",
+				new Object[] { usuario.getName() }, Locale.getDefault()));
 		if (id == usuarioLogado.getId()) {
 			return "redirect:/logout?logout";
 		}
