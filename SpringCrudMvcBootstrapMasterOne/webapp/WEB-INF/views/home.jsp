@@ -19,7 +19,7 @@
    		<a href="?lang=en"><img alt="English" src="<spring:url value="/resources/images/eua.jpg" />"></a>
 		<a href="?lang=pt_BR"><img alt="Portugues" src="<spring:url value="/resources/images/brasil.jpeg" />"></a>
    			<div class="user-info">
-		        <h1><spring:message code="home.welcome" arguments="${usuarioLogado.nome}"/></h1><br />
+		        <h1><spring:message code="home.welcome" arguments="${usuarioLogado.name}"/></h1><br />
 		        <c:if test="${param.message != null}">
 					<span class="alert alert-success alert-success-home" >${param.message}</span>
 				</c:if>
@@ -46,8 +46,8 @@
 				</thead>
 		        <c:forEach items="${usuarios}" var="usuario">
 		        	<tr>
-					    <td>${usuario.nome}</td>
-					    <td>${usuario.usuarionome}</td> 
+					    <td>${usuario.name}</td>
+					    <td>${usuario.username}</td> 
 					 	<fmt:parseDate value="${usuario.dataNascimento}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
 					    <td><fmt:formatDate type="date" value="${parsedDate}" /></td>
 					    <td><spring:message code="usuario.funcao.${usuario.funcao}"/></td>
@@ -59,7 +59,7 @@
 	        				</a>
 	        				<sec:authorize access="hasRole('FUNCAO_ADMIN')" var="teste">
 	        					<spring:message code="home.usuarios.table.actions" var="removerTitle"/>
-		        				<button onclick="showModalRemoveUser('${usuario.id}','${usuario.nome}')" class="btn btn-default btn-lg" title="${removerTitle}">
+		        				<button onclick="showModalRemoveUser('${usuario.id}','${usuario.name}')" class="btn btn-default btn-lg" title="${removerTitle}">
 				  					<span class="glyphicon glyphicon-remove" ></span>
 		        				</button>
 	        				</sec:authorize>
@@ -95,14 +95,14 @@
         <script type="text/javascript" src="<spring:url value="/resources/js/jquery.js" />"></script>
         <script type="text/javascript" src="<spring:url value="/resources/js/bootstrap.min.js" />"></script>
                 <script type="text/javascript">
-        	function showModalRemoveUser(id,nome){
+        	function showModalRemoveUser(id,name){
         		var usuarioLogadorId = '${usuarioLogado.id}';
         		if(usuarioLogadorId == id){
         			$("#usuarioLogadoAlert").show();
         		} else {
         			$("#usuarioLogadoAlert").hide();
         		}
-        		$("#modalUserName").html(nome)
+        		$("#modalUserName").html(name)
         		$("#link-remove").attr("href", "${remove_url}" + id);
 	        	$('#modal-remove').modal('show')
         	}

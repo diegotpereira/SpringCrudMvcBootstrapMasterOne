@@ -25,7 +25,7 @@
 				<c:if test="${param.logout != null}">
 					<span class="alert alert-success alert-warning-login" ><spring:message code="login.logout.message"/></span>
 				</c:if>
-				<input type="text" id="nomeUsuario" name="nomeUsuario" class="form-control" placeholder="<spring:message code="login.input.usuario"/>" required autofocus/> 
+				<input type="text" id=username name="username" class="form-control" placeholder="<spring:message code="login.input.usuario"/>" required autofocus/> 
  				<input type="password" id="password" name="password" class="form-control" placeholder="<spring:message code="login.input.password"/>" required/>
 				<div class="form-actions">
  					<button type="submit" class="btn btn-lg btn-primary btn-block"><spring:message code="login.btlogin.label"/></button>

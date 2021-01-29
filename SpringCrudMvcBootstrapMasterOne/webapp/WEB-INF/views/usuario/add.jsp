@@ -9,7 +9,7 @@
 <html lang="pt-br">
      <head>
            <meta charset="UTF-8">
-           <title><spring:message code="criar.titulo" /></title>
+           <title><spring:message code="add.title" /></title>
            <link href="<spring:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
            <link href="<spring:url value="/resources/css/geral.css" />"         rel="stylesheet">
            <link href="<spring:url value="/resources/css/jquery-ui.min.css" />" rel="stylesheet">
@@ -22,7 +22,7 @@
         <c:url var="post_url" value="/usuario/add/salvar" />
         <form:form id="form-add" action="${post_url}" modelAttribute="usuario" method="post" class="form-signin">
       
-         <h2 class="form-signin-heading"> <spring:message code="criar.titulo"/></h2>
+         <h2 class="form-signin-heading"> <spring:message code="add.titulo"/></h2>
          <c:if test="${param.message != null }">
           <span class="alert alert-sucess alert-warning-login">${param.message}</span></c:if>
          
@@ -31,36 +31,37 @@
          <form:hidden path="id"/>
       
          <!--- entrada nome -->
-         <form:errors path="nome" element="div" class=" alert alert-warning" />
-         <spring:message code="criar.input.nome" var="nameLabel" />
-         <form:input path="nome" class="form-control" placeholder="${nameLabel }" required="true" autofocus="true" />
+         <form:errors path="name" element="div" class=" alert alert-warning" />
+         <spring:message code="add.input.nome" var="nameLabel" />
+         <form:input path="name" class="form-control" placeholder="${nameLabel }" required="true" autofocus="true" />
       
          <!-- Entarada Data Nascimento -->
          <form:errors path="DataNascimento" element="div" class="alert alert-warning" />
-         <spring:message code="criar.input.dataNascimento" var="dataNascimento" />
+         <spring:message code="add.input.dataNascimento" var="dataNascimento" />
          <form:input path="dataNascimento" readonly="readonly" id="dataNascimento-input" class="form-control" placeholder="${dataNascimento }" required="true" />
       
          <!-- Entrada Nome -->
-         <form:errors path="nomeUsuario" element="div" class="alert alert-teste alert-warning" />
+         <form:errors path="username" element="div" class="alert alert-teste alert-warning" />
          <div id="usuario-alert" style="display: none" class="alert alert-warning"></div>
-         <spring:message code="criar.input.nomeUsuario" var="nomeUsuariolabel" />
-         <form:input path="nomeUsuario" class="form-control" placeholder="${nomeUsuariolabel }" required="true" onblur="checkNomeUsuarioExiste{this.value}" />
+         <spring:message code="add.input.nomeUsuario" var="nomeUsuariolabel" />
+         <form:input path="username" class="form-control" placeholder="${nomeUsuariolabel }" required="true" onblur="checkNomeUsuarioExiste{this.value}" />
       
          <!-- Entrada Senha -->
          <form:errors path="password" element="div" class="alert alert-warning" />
-         <spring:message code="criar.input.password" var="passwordLabel" />
+         <spring:message code="add.input.password" var="passwordLabel" />
          <form:password path="password" id="password" onblur="checkPasswords()" class="form-control" placeholder="${passwordLabel }" required="true" />
          <div id="password-alert" style="display: none;" class="alert alert-warning"></div>
-         <spring:message code="criar.input.confirmpassword" var="confirmPasswordLabel" />
+         <spring:message code="add.input.confirmpassword" var="confirmPasswordLabel" />
          <input type="password" id="confirm-password" onblur="checkPasswords()" name="confirmarSenha" class="form-control" placeholder="${confirmPasswordLabel }" required="required" />
       
          <!-- Entrada Função -->
          <form:errors path="funcao" element="div" class="alert alert-warning" />
-             <c:forEach items="<%=Funcao.values() %>" var="funcao"> <spring:message code="usuario.funcao.${Funcao.nome()}" var="label" />
-              <form:radiobutton path="funcao" value="${funcao }" label="${label }" required="true" />&nbsp</c:forEach>
+             <c:forEach items="<%=Funcao.values() %>" var="funcao"> 
+<%--              <spring:message code="usuario.funcao.${usuario.funcao()}" var="label" /> --%>
+              <form:radiobutton path="funcao" value="${funcao}" label="${label }" required="true" />&nbsp</c:forEach>
       
               <div class="form-actions">
-                   <button type="submit" id="btn-salvar" class="btn btn-lg btn-primary btn-block"><spring:message code="criar.input.cadastra" /></button>
+                   <button type="submit" id="btn-salvar" class="btn btn-lg btn-primary btn-block"><spring:message code="add.input.cadastra" /></button>
                    <sec:authorize access="isAnonymous()" var="usuarioDeslogado" />
                    <c:choose>
                           <c:when test="${usuarioDeslogado }">
@@ -69,7 +70,7 @@
                           </c:when>
                                   <c:otherwise>
                                            <c:url var="home_url" value="/" />
-                                           <a href="${home_url }" class="btn btn-lg btn-primay btn-block"><spring:message code="criar.input.voltar" /></a>
+                                           <a href="${home_url }" class="btn btn-lg btn-primay btn-block"><spring:message code="add.input.voltar" /></a>
                                   </c:otherwise>
                    </c:choose>
               </div>
@@ -105,7 +106,7 @@
         	        $("#password-alert")
         	            .show()
         	            .html(
-        	                "<spring:message code='criar.message.senhasIguais'/>");
+        	                "<spring:message code='add.message.senhasIguais'/>");
         	        return false;
         	    } else {
         	        $("#password-alert").hide().html("");
@@ -113,7 +114,7 @@
 
         	    }
         	}
-        	function checkNomeUsuarioExiste(nomeUsuario) {
+        	function checkNomeUsuarioExiste(username) {
         	    if (username) {
 
         	        var url = "<spring:url value=" / usuario / checkusuarionome " />";
@@ -121,7 +122,7 @@
         	            .ajax({
         	                url: url,
         	                data: {
-        	                    nomeUsuario: nomeUsuario
+        	                	username: username
         	                },
         	                type: "GET",
         	                success: function(data) {
@@ -132,9 +133,9 @@
         	                        $("#user-alert")
         	                            .show()
         	                            .html(
-        	                                "<spring:message code='criar.message.usuarioExistente.parte1'/><strong>" +
-        	                                nomeUsuario +
-        	                                "</strong><spring:message code='criar.message.usuarioExistente.parte2'/>");
+        	                                "<spring:message code='add.message.usuarioExistente.parte1'/><strong>" +
+        	                                username +
+        	                                "</strong><spring:message code='add.message.usuarioExistente.parte2'/>");
         	                    } else {
         	                        $(":submit").removeAttr("disabled");
         	                        $("#user-alert").hide().html("");
